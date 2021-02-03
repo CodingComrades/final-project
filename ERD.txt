@@ -1,0 +1,54 @@
+departments
+-
+department_id INT PK
+department VARCHAR
+
+aisles
+-
+aisle_id INT PK
+aisle VARCHAR
+
+sample_submission
+-
+order_id INT PK
+products VARCHAR
+
+order_products_train
+-
+id SERIAL PK
+order_id INT
+product_id INT
+add_to+cart INT
+reordered INT
+
+order_products_prior
+-
+id SERIAL PK
+order_id INT
+product_id INT
+add_to_car_order INT
+reordered INT
+
+products
+-
+product_id INT PK
+product_name VARCHAR
+aisle_id INT FK
+department_id INT FK
+departemtns_department_id INT FK >- departments.department_id
+aisles_aisles_id INT FK >- aisles.aisle_id
+order_prior_id INT FK >- order_products_prior.id
+order_train_id INT FK >- order_products_train.id
+
+orders_clean
+-
+order_id INT PK
+user_id NUMERIC
+eval_set VARCHA
+order_number NUMERIC
+order_dow NUMBERIC
+order_hour_of_day NUMERIC
+days_since_prior_order NUMERIC
+order_prior_id INT FK >- order_products_prior.id
+order_train_id INT FK >- order_products_train.id
+sample_order_id INT FK >- sample_submission.order_id

@@ -3,13 +3,13 @@ CREATE TABLE departments (
 	department VARCHAR NOT NULL,
 	PRIMARY KEY (department_id)
 );
-
+SELECT * FROM departments;
 CREATE TABLE aisles (
 	aisle_id INT, 
 	aisle VARCHAR NOT NULL,
 	PRIMARY KEY (aisle_id)
 );
-
+SELECT * FROM aisles;
 CREATE TABLE sample_submission (
 	order_id INT,
 	products VARCHAR NOT NULL,
@@ -67,5 +67,25 @@ CREATE TABLE orders_clean (
 	FOREIGN KEY (sample_order_id) REFERENCES sample_submission(order_id)
 );
 
-SELECT * FROM order_products_train;
-DROP TABLE orders_clean;
+SELECT * FROM aisles;
+SELECT * FROM products;
+
+SELECT orders_clean.order_id, orders_clean.user_id, order_products_prior.id
+FROM order_products_prior
+JOIN orders_clean
+ON orders_clean.order_id = order_products_prior.order_id;
+
+SELECT orders_clean.user_id, orders_clean.order_id, order_products_prior.product_id, products.product_name
+FROM orders_clean
+JOIN order_products_prior
+ON orders_clean.order_id = order_products_prior.order_id
+JOIN products
+ON order_products_prior.product_id = products.product_id
+ORDER BY orders_clean.user_id;
+
+
+CREATE TABLE MLcategories AS
+SELECT *
+FROM 
+	
+

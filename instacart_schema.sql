@@ -75,6 +75,7 @@ FROM order_products_prior
 JOIN orders_clean
 ON orders_clean.order_id = order_products_prior.order_id;
 
+
 SELECT orders_clean.user_id, orders_clean.order_id, order_products_prior.product_id, products.product_name
 FROM orders_clean
 JOIN order_products_prior
@@ -83,9 +84,22 @@ JOIN products
 ON order_products_prior.product_id = products.product_id
 ORDER BY orders_clean.user_id;
 
+DROP TABLE ML2categories;
+CREATE TABLE ML2categories AS
+SELECT orders_clean.user_id, orders_clean.order_id, order_products_prior.product_id, products.product_name, departments.department_id, departments.department, aisles.aisle_id, aisles.aisle 
+FROM orders_clean
+JOIN order_products_prior
+ON orders_clean.order_id = order_products_prior.order_id
+JOIN products
+ON order_products_prior.product_id = products.product_id
+JOIN departments
+ON departments.department_id = products.department_id
+JOIN aisles
+ON aisles.aisle_id = products.aisle_id
+ORDER BY orders_clean.user_id
 
-CREATE TABLE MLcategories AS
-SELECT *
-FROM 
-	
+DROP TABLE MLnumbercategories;
+
+ 
+
 

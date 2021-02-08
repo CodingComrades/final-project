@@ -98,8 +98,16 @@ JOIN aisles
 ON aisles.aisle_id = products.aisle_id
 ORDER BY orders_clean.user_id
 
-DROP TABLE MLnumbercategories;
-
- 
-
-
+DROP TABLE NewCategories;
+CREATE TABLE NewCategories AS
+SELECT orders_clean.user_id, orders_clean.order_id, order_products_prior.product_id, products.product_name, departments.department_id, departments.department, aisles.aisle_id, aisles.aisle, orders_clean.order_number, orders_clean.order_dow, orders_clean.order_hour_of_day, orders_clean.days_since_prior_order, order_products_prior.add_to_cart_order, order_products_prior.reordered
+FROM orders_clean
+JOIN order_products_prior
+ON orders_clean.order_id = order_products_prior.order_id
+JOIN products
+ON order_products_prior.product_id = products.product_id
+JOIN aisles
+ON aisles.aisle_id = products.aisle_id
+JOIN departments
+ON departments.department_id = products.department_id
+ORDER BY orders_clean.user_id

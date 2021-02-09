@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Bootstrap Visualization Dashboard</title>
+  <title>Produce</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -56,6 +56,26 @@
         <div class="box">
           <h3 class="title">Produce</h3>
           <hr>
+          <script src="d3.min.js?v=3.2.8"></script>
+
+        <script type="text/javascript"charset="utf-8">
+            d3.text("LimitedData.csv", function(data) {
+                var parsedCSV = d3.csv.parseRows(data);
+
+                var container = d3.select("body")
+                    .append("table")
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+        </script>
+
         </div>
       </div>
       <div class="col-lg-5 col-md-12">

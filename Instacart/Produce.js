@@ -1,7 +1,19 @@
-d3.csv("LimitedData.csv").then(function(data) {
-    console.log("Hello");
-    console.log(data);
+d3.text("LimitedData.csv", function(data) {
+  var parsedCSV = d3.csv.parseRows(data);
 
-    var FilteredData = data.filter(function(d){  if (d.department == "produce") {return d.product_name}  })
-        console.log(FilteredData);
+  var container = d3.select("body")
+    .append("table")
+
+    .selectAll("tr")
+    .data(parsedCSV).enter()
+    .append("tr")
+
+    .selectAll("td")
+    .data(function(d) {
+      return d;
+    }).enter()
+    .append("td")
+    .text(function(d) {
+      return d;
+    });
 });
